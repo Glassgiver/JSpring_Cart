@@ -1,4 +1,4 @@
-package glassgiver.springproject;
+package glassgiver.springproject.model;
 
 
 public class Product{

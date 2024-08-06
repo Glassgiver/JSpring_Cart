@@ -1,10 +1,10 @@
 package glassgiver.springproject;
 
+import glassgiver.springproject.components.Cart;
+import glassgiver.springproject.repositories.ProductRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -14,6 +14,11 @@ public class SpringWebApplication {
 
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(SpringWebApplication.class, args);
+        //consoleVersion(context);
+
+    }
+
+    public static void consoleVersion(ApplicationContext context){
 
         Scanner scanner = new Scanner(System.in);
         ProductRepository productRepository = context.getBean(ProductRepository.class);
@@ -62,7 +67,6 @@ public class SpringWebApplication {
                     System.out.println("\nInvalid choice. Please try again.");
             }
         }
-
     }
 
 }
