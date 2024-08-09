@@ -1,15 +1,23 @@
 package glassgiver.springproject.model;
 
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "products")
 public class Product{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private int price;
 
-    public Product(int id, String name, int price) {
-        this.id = id;
+    public Product(String name, int price) {
         this.name = name;
         this.price = price;
+    }
+
+    public Product() {
+
     }
 
     public int getId() {
