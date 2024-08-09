@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int CartID;
+    private Integer CartID;
     private int UserID;
 
     public Cart() {
@@ -23,7 +23,7 @@ public class Cart {
         return CartID;
     }
 
-    public void setCartID(int cartID) {
+    public void setCartID(Integer cartID) {
         CartID = cartID;
     }
 

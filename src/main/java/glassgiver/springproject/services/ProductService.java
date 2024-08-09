@@ -2,7 +2,11 @@ package glassgiver.springproject.services;
 
 import glassgiver.springproject.model.Product;
 import glassgiver.springproject.repositories.ProductRepository;
+import glassgiver.springproject.repositories.specifications.ProductSpecifications;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,8 +21,18 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public List<Product> showAll(){
-        return productRepository.findAll();
+    public Page<Product> findAll(Integer minPrice, Integer maxPrice, String partName, Integer page){
+        Specification<Product> spec = Specification.where(null);
+        if(minPrice != null){
+            spec = spec.and(ProductSpecifications.priceGreaterOrEquals(minPrice));
+        }
+        if(maxPrice != null){
+            spec = spec.and(ProductSpecifications.priceLessOrEquals(maxPrice));
+        }
+        if(partName != null){
+            spec = spec.and(ProductSpecifications.nameLike(partName));
+        }
+        return productRepository.findAll(spec, PageRequest.of(page - 1, 5));
     }
 
     public List<Product> findByPriceBetween(Integer min, Integer max) {
