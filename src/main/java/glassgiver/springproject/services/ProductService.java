@@ -1,8 +1,10 @@
 package glassgiver.springproject.services;
 
+import glassgiver.springproject.dtos.ProductDTO;
 import glassgiver.springproject.model.Product;
 import glassgiver.springproject.repositories.ProductRepository;
 import glassgiver.springproject.repositories.specifications.ProductSpecifications;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,13 +15,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ProductService {
-    private ProductRepository productRepository;
-
-    @Autowired
-    public ProductService(ProductRepository productRepository){
-        this.productRepository = productRepository;
-    }
+    private final ProductRepository productRepository;
 
     public Page<Product> findAll(Integer minPrice, Integer maxPrice, String partName, Integer page){
         Specification<Product> spec = Specification.where(null);
